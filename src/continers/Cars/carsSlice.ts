@@ -64,7 +64,7 @@ export const carsSlice = createSlice({
         state.list = action.payload.cars;
         if (state.pagination.currentPage > action.payload.totalPageCount) {
           state.pagination = {
-            currentPage: action.payload.totalCarsCount,
+            currentPage: 1,
             totalPageCount: action.payload.totalPageCount,
             totalCarsCount: action.payload.totalCarsCount,
           };
