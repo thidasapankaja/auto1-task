@@ -15,4 +15,4 @@
 * Using classes (Premature optimization since this is not a project where same class is being used multiple times)
 
 
-## App is [live](auto1-task-tp.netlify.app)
+## App is [live](https://auto1-task-tp.netlify.app/)
