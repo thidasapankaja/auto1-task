@@ -8,7 +8,8 @@ import {AppDispatch} from "../../app/store";
 import CarRow from "../../components/CarRow";
 import LeftSidebar from "../../components/LeftSidebar";
 import Pagination from "../../components/Pagination";
-import {getCars, getColors, getManufacturers, resetSelectedCar, selectCars} from "./carsSlice";
+import {getCars, getColors, getManufacturers, selectCars} from "./carsSlice";
+import {resetSelectedCar} from "../Car/carSlice";
 
 const Cars = () => {
   const dispatch = useDispatch<AppDispatch>();

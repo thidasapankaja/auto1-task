@@ -6,8 +6,8 @@ import {StyledButton} from "../Base/styled";
 
 type FavouriteProps = {
   onClick?: () => void;
-  disabled: boolean;
-  isFavourite: boolean;
+  disabled?: boolean;
+  isFavourite?: boolean;
 };
 
 const Favourite = ({onClick, disabled, isFavourite}: FavouriteProps) => {
@@ -20,8 +20,13 @@ const Favourite = ({onClick, disabled, isFavourite}: FavouriteProps) => {
         </Typography>
       </CardContent>
       <Box sx={{display: "flex", justifyContent: "flex-end"}}>
-        <StyledButton disabled={disabled} variant="contained" onClick={onClick}>
-          {isFavourite ? 'Unsave' : 'Save'}
+        <StyledButton
+          disabled={disabled}
+          variant="contained"
+          onClick={onClick}
+          data-testid="favourite-button"
+        >
+          {isFavourite ? "Unsave" : "Save"}
         </StyledButton>
       </Box>
     </Card>

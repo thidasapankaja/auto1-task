@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {Box} from "@mui/system";
 import {AppDispatch} from "../../app/store";
-import {getCar, selectCars} from "../Cars/carsSlice";
+import {getCar, selectCar} from "./carSlice";
 import {Typography} from "@mui/material";
 import Favourite from "../../components/Favourite";
 import {capitalizeFirstLetter} from "../../utils/helpers";
@@ -14,7 +14,7 @@ type URLParams = {
 
 const Car = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {selectedCar} = useSelector(selectCars);
+  const {car} = useSelector(selectCar);
 
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -26,28 +26,28 @@ const Car = () => {
 
   useEffect(() => {
     const handleStorage = () => {
-      if (selectedCar?.stockNumber) {
+      if (car?.stockNumber) {
         const favouriteCars =
           JSON.parse(localStorage.getItem("favourites") || "{}") || {};
-          setIsFavourite(!!favouriteCars[selectedCar?.stockNumber])
-        return favouriteCars[selectedCar?.stockNumber];
+        setIsFavourite(!!favouriteCars[car?.stockNumber]);
+        return favouriteCars[car?.stockNumber];
       }
     };
     window.addEventListener("storage", handleStorage());
     return () => window.removeEventListener("storage", handleStorage());
-  }, [selectedCar?.stockNumber]);
+  }, [car?.stockNumber]);
 
   const setFavourite = async () => {
-    if (selectedCar?.stockNumber) {
+    if (car?.stockNumber) {
       const favouriteCars =
         JSON.parse(localStorage.getItem("favourites") || "{}") || {};
 
       if (isFavourite) {
-        setIsFavourite(false)
-        delete favouriteCars[selectedCar.stockNumber];
+        setIsFavourite(false);
+        delete favouriteCars[car.stockNumber];
       } else {
-        setIsFavourite(true)
-        favouriteCars[selectedCar.stockNumber] = selectedCar;
+        setIsFavourite(true);
+        favouriteCars[car.stockNumber] = car;
       }
       localStorage.setItem("favourites", JSON.stringify(favouriteCars));
       window.dispatchEvent(new Event("storage"));
@@ -70,7 +70,7 @@ const Car = () => {
             <Typography
               sx={{fontSize: "32px", fontWeight: "bold", padding: "24px 0"}}
             >
-              {selectedCar?.modelName}
+              {car?.modelName}
             </Typography>
             <Typography
               style={{
@@ -79,11 +79,11 @@ const Car = () => {
                 padding: "8px 0",
               }}
             >
-              Stock # {selectedCar?.stockNumber} -{" "}
-              {selectedCar?.mileage?.number}{" "}
-              {selectedCar?.mileage?.unit?.toUpperCase()} -{" "}
-              {selectedCar?.fuelType} -{" "}
-              {capitalizeFirstLetter(selectedCar?.color || "")}
+              Stock # {car?.stockNumber} -{" "}
+              {car?.mileage?.number}{" "}
+              {car?.mileage?.unit?.toUpperCase()} -{" "}
+              {car?.fuelType} -{" "}
+              {capitalizeFirstLetter(car?.color || "")}
             </Typography>
             <Typography
               sx={{fontWeight: "400", fontSize: "14px", padding: "14px 0"}}
@@ -96,7 +96,7 @@ const Car = () => {
           </Box>
           <Favourite
             isFavourite={isFavourite}
-            disabled={!selectedCar?.stockNumber}
+            disabled={!car?.stockNumber}
             onClick={setFavourite}
           />
         </Box>

@@ -1,13 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
 import {capitalizeFirstLetter} from "../../utils/helpers";
-import {fetchCar, fetchCars, fetchColors, fetchManufacturers} from "./carsAPI";
+import {fetchCars, fetchColors, fetchManufacturers} from "./carsAPI";
 import {CarsResponse, CarsState, Manufacturer, Status} from "./models";
 
 const initialState: CarsState = {
   list: [],
   status: Status.idle,
-  selectedCar: null,
   manufacturers: [],
   colors: [],
   pagination: {
@@ -50,22 +49,10 @@ export const getManufacturers = createAsyncThunk(
   }
 );
 
-export const getCar = createAsyncThunk(
-  "GET_CAR",
-  async (stockNumber: number) => {
-    const response = await fetchCar(stockNumber);
-    return response;
-  }
-);
-
 export const carsSlice = createSlice({
   name: "cars",
   initialState,
-  reducers: {
-    resetSelectedCar: (state, action) => {
-      state.selectedCar = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getCars.pending, (state, action) => {
@@ -92,16 +79,6 @@ export const carsSlice = createSlice({
       .addCase(getCars.rejected, (state) => {
         state.status = Status.error;
       })
-      .addCase(getCar.pending, (state) => {
-        state.status = Status.loading;
-      })
-      .addCase(getCar.fulfilled, (state, action) => {
-        state.status = Status.idle;
-        state.selectedCar = action.payload;
-      })
-      .addCase(getCar.rejected, (state) => {
-        state.status = Status.error;
-      })
       .addCase(getColors.fulfilled, (state, action) => {
         state.status = Status.idle;
         state.colors = action.payload;
@@ -114,7 +91,5 @@ export const carsSlice = createSlice({
 });
 
 export const selectCars = (state: RootState) => state.cars;
-
-export const {resetSelectedCar} = carsSlice.actions;
 
 export default carsSlice.reducer;

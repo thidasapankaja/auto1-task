@@ -61,9 +61,13 @@ type option = {
 export type CarsState = {
   list: CarsModel;
   status: Status;
-  selectedCar: CarModel | null;
   colors: Array<option> | [];
   manufacturers: Array<option> | [];
   pagination: PaginationModel;
   favourites: Array<CarModel> | [];
+};
+
+export type CarState = {
+  car: CarModel | null;
+  status: Status;
 };
