@@ -17,7 +17,7 @@ const Logo = () => {
       }}
       alt="auto1 logo"
       src={logo}
-      onClick={() => navigate("/cars")}
+      onClick={() => navigate("/")}
     />
   );
 };

@@ -14,7 +14,7 @@ type URLParams = {
 
 const Car = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {car} = useSelector(selectCar);
+  const {car, status} = useSelector(selectCar);
 
   const [isFavourite, setIsFavourite] = useState(false);
 
@@ -56,51 +56,51 @@ const Car = () => {
 
   return (
     <Box>
-      <Box sx={{minHeight: "300px", background: "#ededed"}}></Box>
-      <Box sx={{display: "flex", justifyContent: "center"}}>
-        <Box
-          sx={{
-            width: "800px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{marginRight: "12px"}}>
-            <Typography
-              sx={{fontSize: "32px", fontWeight: "bold", padding: "24px 0"}}
-            >
-              {car?.modelName}
-            </Typography>
-            <Typography
-              style={{
-                fontWeight: "regular",
-                fontSize: "24px",
-                padding: "8px 0",
-              }}
-            >
-              Stock # {car?.stockNumber} -{" "}
-              {car?.mileage?.number}{" "}
-              {car?.mileage?.unit?.toUpperCase()} -{" "}
-              {car?.fuelType} -{" "}
-              {capitalizeFirstLetter(car?.color || "")}
-            </Typography>
-            <Typography
-              sx={{fontWeight: "400", fontSize: "14px", padding: "14px 0"}}
-            >
-              This car is currently available and can be delivered as soon as
-              tomorrow morning. Please be aware that delivery times shown in
-              this page are not definite and may change due to bad weather
-              conditions.
-            </Typography>
+      <Box sx={{minHeight: "300px", background: "#ededed"}}></Box>\
+      {status !== 'loading' && (
+        <Box sx={{display: "flex", justifyContent: "center"}}>
+          <Box
+            sx={{
+              width: "800px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{marginRight: "12px"}}>
+              <Typography
+                sx={{fontSize: "32px", fontWeight: "bold", padding: "24px 0"}}
+              >
+                {car?.modelName}
+              </Typography>
+              <Typography
+                style={{
+                  fontWeight: "regular",
+                  fontSize: "24px",
+                  padding: "8px 0",
+                }}
+              >
+                Stock # {car?.stockNumber} - {car?.mileage?.number}{" "}
+                {car?.mileage?.unit?.toUpperCase()} - {car?.fuelType} -{" "}
+                {capitalizeFirstLetter(car?.color || "")}
+              </Typography>
+              <Typography
+                sx={{fontWeight: "400", fontSize: "14px", padding: "14px 0"}}
+              >
+                This car is currently available and can be delivered as soon as
+                tomorrow morning. Please be aware that delivery times shown in
+                this page are not definite and may change due to bad weather
+                conditions.
+              </Typography>
+            </Box>
+            <Favourite
+              isFavourite={isFavourite}
+              disabled={!car?.stockNumber}
+              onClick={setFavourite}
+            />
           </Box>
-          <Favourite
-            isFavourite={isFavourite}
-            disabled={!car?.stockNumber}
-            onClick={setFavourite}
-          />
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };

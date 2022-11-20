@@ -71,10 +71,7 @@ const Car = ({loading, car, onCarView}: CarInterface) => {
               {capitalizeFirstLetter(car.fuelType)} -{" "}
               {capitalizeFirstLetter(car.color)}
             </Typography>
-            <StyledLink
-              onClick={() => onCarView(car.stockNumber)}
-              sx={{fontSize: "14px", margin: "8px"}}
-            >
+            <StyledLink onClick={() => onCarView(car.stockNumber)}>
               View details
             </StyledLink>
           </CardContent>

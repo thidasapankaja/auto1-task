@@ -26,7 +26,7 @@ const NotFound = () => {
       </Typography>
       <Typography sx={{fontSize: "18px", margin: "12px"}}>
         You can always go back to the{" "}
-        <StyledLink onClick={() => navigate("/cars")}>homepage</StyledLink>
+        <StyledLink onClick={() => navigate("/")}>homepage</StyledLink>
       </Typography>
     </Box>
   );

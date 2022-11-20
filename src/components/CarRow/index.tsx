@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import {capitalizeFirstLetter} from "../../utils/helpers";
 
 import {CarModel} from "../../continers/Cars/models";
-import {StyledLink} from "../Base/styled";
+import {CustomizedStyledLink} from "./styled";
 
 interface CarInterface {
   loading: boolean;
@@ -33,16 +33,16 @@ const Loading = () => (
             background: "#ededed",
             margin: "8px 0",
           }}
-        ></Box>
+        />
         <Box
           sx={{
             width: "250px",
-            height: "10px",
+            height: "15px",
             background: "#ededed",
             margin: "8px 0",
           }}
-        ></Box>
-        <Box sx={{width: "100px", height: "10px", background: "#ededed"}}></Box>
+        />
+        <Box sx={{width: "100px", height: "15px", background: "#ededed"}} />
       </CardContent>
     </Box>
   </Box>
@@ -108,12 +108,9 @@ const Car = ({loading, car, onCarView}: CarInterface) => {
                 {capitalizeFirstLetter(car.fuelType)} -{" "}
                 {capitalizeFirstLetter(car.color)}
               </Typography>
-              <StyledLink
-                onClick={() => onCarView(car.stockNumber)}
-                sx={{fontSize: "14px", margin: "8px"}}
-              >
+              <CustomizedStyledLink onClick={() => onCarView(car.stockNumber)}>
                 View details
-              </StyledLink>
+              </CustomizedStyledLink>
             </CardContent>
           </Box>
         </Box>

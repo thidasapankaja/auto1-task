@@ -6,7 +6,7 @@ import {CarsResponse, CarsState, Manufacturer, Status} from "./models";
 
 const initialState: CarsState = {
   list: [],
-  status: Status.idle,
+  status: Status.loading,
   manufacturers: [],
   colors: [],
   pagination: {

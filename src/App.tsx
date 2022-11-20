@@ -35,7 +35,7 @@ function App() {
         <HeaderBar />
         <Grid sx={{flexGrow: 1}}>
           <Routes>
-            <Route path="/cars" element={<Cars />} />
+            <Route path="/" element={<Cars />} />
             <Route path="/cars/:stockNumber" element={<Car />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
