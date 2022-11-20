@@ -1,6 +1,6 @@
 import {CarsResponse} from "./models";
 
-const BASE_URL = "https://auto1-mock-server.herokuapp.com";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 export const fetchCars = async (page: string, query: string) => {
   const resp = await fetch(`${BASE_URL}/api/cars?page=${page}${query}`);
